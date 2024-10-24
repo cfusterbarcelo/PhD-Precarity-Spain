@@ -10,8 +10,6 @@ mean_spain_df = pd.read_csv('data/mean-mode-spain-persex.csv', encoding='latin1'
 
 # Remove first row from the DataFrames
 fpu_df = fpu_df.iloc[1:]
-fpi_df = fpi_df.iloc[1:]
-rent_df = rent_df.iloc[1:]
 
 # Renaming the columns for better understanding (you can adjust these based on your actual data)
 fpu_df.rename(columns={'Unnamed: 0': 'Government', 
