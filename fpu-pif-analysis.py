@@ -43,6 +43,30 @@ for _, row in fpu_df.iterrows():
 # Create new DataFrame from expanded rows
 fpu_df_expanded = pd.DataFrame(expanded_rows)
 
+pif_df = pd.read_csv('data/fpi.csv')
+
+# Remove first row from the DataFrames
+pif_df = pif_df.iloc[1:]
+
+# Renaming the columns for better understanding (you can adjust these based on your actual data)
+pif_df.rename(columns={'Unnamed: 0': 'Government', 
+                       'Unnamed: 1': 'Year', 
+                       'Unnamed: 7': 'Mean_Salary'}, inplace=True)
+
+# Drop rows with missing salary data, if any
+pif_df = pif_df.dropna(subset=['Mean_Salary'])
+
+# Convert columns to the correct data types
+pif_df['Year'] = pif_df['Year'].astype(int)
+# Sanitize the salary column by removing the € sign and converting it to float
+
+pif_df['Mean_Salary'] = pif_df['Mean_Salary'].str.replace('€', '').str.replace(',', '').str.replace('.', '').astype(float)/100
+
+        
+# Create new DataFrame from expanded rows
+pif_df_expanded = pd.DataFrame(pif_df)
+
+
 # Sanitze the "Total" column by removing the € sign and converting it to float
 mean_spain_df['Total'] = mean_spain_df['Total'].str.replace('€', '').str.replace(',', '').str.replace('.', '').astype(float)/100
 
@@ -61,6 +85,9 @@ plt.figure(figsize=(10, 6))
 # Plot FPU Mean Salary
 sns.lineplot(data=fpu_df_expanded, x='Year', y='Mean_Salary', marker="o", color='blue', label='FPU Salary', linewidth=2)
 
+# Plot the PIF Mean Salary
+sns.lineplot(data=pif_df_expanded, x='Year', y='Mean_Salary', marker="o", color='pink', label='PIF Salary', linewidth=2)
+
 # Plot Mean Salary in Spain
 sns.lineplot(data=mean_spain_salary_df, x='Periodo', y='Total', marker="o", color='red', label='Mean Salary Spain', linewidth=2)
 
@@ -68,7 +95,7 @@ sns.lineplot(data=mean_spain_salary_df, x='Periodo', y='Total', marker="o", colo
 sns.lineplot(data=mode_spain_salary_df, x='Periodo', y='Total', marker="o", color='green', label='Mode Salary Spain', linewidth=2)
 
 # Customize the plot
-plt.title("FPU Salary vs. Spain's Mean and Mode Salaries", fontsize=14)
+plt.title("PhD salaries vs. Spain's Mean and Mode Salaries", fontsize=14)
 plt.xlabel('Year', fontsize=12)
 plt.ylabel('Annual Salary (€)', fontsize=12)
 
@@ -89,6 +116,5 @@ plt.legend()
 
 # Show the plot
 plt.tight_layout()
-plt.savefig('results/fpu_salary_vs_spain_salaries.png')
+plt.savefig('results/fpu_and_pif_salary_vs_spain_salaries.png')
 plt.show()
-

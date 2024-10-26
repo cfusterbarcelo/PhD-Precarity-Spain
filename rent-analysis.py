@@ -45,9 +45,11 @@ df_cleaned['Valencia_m2_max_FPU'] = clean_m2_column(df_cleaned['Valencia_m2_max_
 
 plt.figure(figsize=(10, 6))
 
-plt.plot(df_cleaned['Year'], df_cleaned['Madrid_m2_max_FPU'], label='Madrid m2 max FPU', marker='o')
-plt.plot(df_cleaned['Year'], df_cleaned['Barcelona_m2_max_FPU'], label='Barcelona m2 max FPU', marker='o')
-plt.plot(df_cleaned['Year'], df_cleaned['Valencia_m2_max_FPU'], label='Valencia m2 max FPU', marker='o')
+plt.plot(df_cleaned['Year'], df_cleaned['Madrid_m2_max_FPU'], label='Madrid m2 max FPU', marker='o', color="blue", alpha=1)
+# Different line style for Barcelona
+plt.plot(df_cleaned['Year'], df_cleaned['Barcelona_m2_max_FPU'], label='Barcelona m2 max FPU', marker='o', color="blue", alpha=0.7, linestyle='--')
+# Different line style for Valencia
+plt.plot(df_cleaned['Year'], df_cleaned['Valencia_m2_max_FPU'], label='Valencia m2 max FPU', marker='o', color="blue", alpha=0.5, linestyle=':')
 
 plt.ylim(0, 75)
 
@@ -73,9 +75,9 @@ df_cleaned['Valencia_m2_max_PIF'] = clean_m2_column(df_cleaned['Valencia_m2_max_
 
 plt.figure(figsize=(10, 6))
 
-plt.plot(df_cleaned['Year'], df_cleaned['Madrid_m2_max_PIF'], label='Madrid m2 max PIF', marker='o')
-plt.plot(df_cleaned['Year'], df_cleaned['Barcelona_m2_max_PIF'], label='Barcelona m2 max PIF', marker='o')
-plt.plot(df_cleaned['Year'], df_cleaned['Valencia_m2_max_PIF'], label='Valencia m2 max PIF', marker='o')
+plt.plot(df_cleaned['Year'], df_cleaned['Madrid_m2_max_PIF'], label='Madrid m2 max PIF', marker='o', color="pink", alpha=1)
+plt.plot(df_cleaned['Year'], df_cleaned['Barcelona_m2_max_PIF'], label='Barcelona m2 max PIF', marker='o', color="pink", alpha=0.9, linestyle='--')
+plt.plot(df_cleaned['Year'], df_cleaned['Valencia_m2_max_PIF'], label='Valencia m2 max PIF', marker='o', color="pink", alpha=0.7, linestyle=':')
 
 plt.ylim(0, 75)
 
